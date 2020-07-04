@@ -1,3 +1,16 @@
+<h4>Sites:</h4>
+<mat-form-field>
+  <mat-label>Select a Site</mat-label>
+  <mat-select [(ngModel)]="selectedSiteEvent">
+    <mat-option *ngFor="let site of sitesList" [value]="site.eventName">
+      {{site.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div>
+  <button class="btn btn-primary" (click)="subscribe()">Subscribe</button>
+</div>
+
 <div style="margin-top: 20px; color: green;">
   {{ subscribed }}
 </div>
