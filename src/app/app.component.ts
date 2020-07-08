@@ -20,20 +20,24 @@ export class AppComponent implements OnInit {
 
   ngOnInit()
   {
-    //this.signalRService.startConnection();
+    this.signalRService.startConnection();
     ////this.subscribed = this.signalRService.addSiteDataListener();
   }
 
   subscribe()
   {   
-    this.signalRService.startConnection(this.selectedSiteEvent); 
-    if(this.currentSubscription !== "")
-    {
-      this.signalRService.removeSiteDataListener(this.currentSubscription);
-      this.subscribed = undefined;
-    }
+    //this.signalRService.startConnection(this.selectedSiteEvent); 
 
-    this.currentSubscription = this.selectedSiteEvent;
-    this.subscribed = this.signalRService.addSiteDataListener(this.selectedSiteEvent);    
+    // allow only one subscription to the event
+    if(this.selectedSiteEvent !== this.currentSubscription)
+    {
+      if(this.currentSubscription !== "")
+      {
+        this.signalRService.removeSiteDataListener(this.currentSubscription);
+        this.subscribed = undefined;
+      }      
+      this.currentSubscription = this.selectedSiteEvent;
+      this.subscribed = this.signalRService.addSiteDataListener(this.selectedSiteEvent);
+    }        
   }
 }
